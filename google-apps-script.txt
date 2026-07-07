@@ -1,0 +1,25 @@
+// Cara guna:
+// 1. Buka Google Sheets baru.
+// 2. Extensions > Apps Script.
+// 3. Paste semua kod ini.
+// 4. Deploy > New deployment > Web app.
+// 5. Execute as: Me. Who has access: Anyone.
+// 6. Copy Web App URL dan paste ke script.js pada bahagian WEB_APP_URL.
+
+function doPost(e) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName('Bookings') || ss.insertSheet('Bookings');
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow([
+      'Timestamp','Nama','Telefon','IC/Passport','Unit','Check-in','Check-out','Malam',
+      'Total','Deposit','Baki','Status','IC Link','PDPA Consent','PDPA Time','Signature Base64'
+    ]);
+  }
+  var data = JSON.parse(e.postData.contents);
+  sheet.appendRow([
+    new Date(), data.nama, data.telefon, data.ic, data.unit, data.checkin, data.checkout,
+    data.malam, data.total, data.deposit, data.baki, data.status, data.icLink,
+    data.pdpaConsent, data.pdpaTime, data.signature
+  ]);
+  return ContentService.createTextOutput(JSON.stringify({ok:true})).setMimeType(ContentService.MimeType.JSON);
+}

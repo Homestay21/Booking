@@ -1,0 +1,28 @@
+// Cara guna:
+// 1. Buka Google Sheets baru.
+// 2. Extensions > Apps Script.
+// 3. Paste semua kod ini.
+// 4. Deploy > New deployment > Web app.
+// 5. Execute as: Me. Who has access: Anyone.
+// 6. Copy Web App URL dan paste ke script.js pada bahagian WEB_APP_URL.
+// Nota: Gambar IC depan/belakang dan signature disimpan sebagai Base64 text dalam Google Sheets.
+// Untuk penggunaan sebenar yang banyak, lebih baik simpan gambar dalam Google Drive dan simpan link sahaja.
+
+function doPost(e) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName('Bookings') || ss.insertSheet('Bookings');
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow([
+      'Timestamp','Nama','Telefon','IC/Passport','Check-in','Check-out','Malam',
+      'Total','Deposit','Baki','Status','IC Depan Base64','IC Belakang Base64',
+      'PDPA Consent','PDPA Time','Signature Base64'
+    ]);
+  }
+  var data = JSON.parse(e.postData.contents);
+  sheet.appendRow([
+    new Date(), data.nama, data.telefon, data.ic, data.checkin, data.checkout,
+    data.malam, data.total, data.deposit, data.baki, data.status,
+    data.icFrontImage, data.icBackImage, data.pdpaConsent, data.pdpaTime, data.signature
+  ]);
+  return ContentService.createTextOutput(JSON.stringify({ok:true})).setMimeType(ContentService.MimeType.JSON);
+}

@@ -1,0 +1,23 @@
+SETUP SISTEM BOOKING HOMESTAY V5
+
+1. Buka https://script.google.com/
+2. Buat New Project.
+3. Copy semua kod daripada fail google-apps-script.gs dan paste ke Apps Script.
+4. Klik Save.
+5. Pilih function setupBookingsSheet, klik Run, dan beri permission.
+6. Klik Deploy > New deployment.
+7. Pilih Type: Web app.
+8. Execute as: Me.
+9. Who has access: Anyone.
+10. Klik Deploy dan copy Web App URL yang berakhir dengan /exec.
+11. Buka fail script.js.
+12. Cari:
+   const WEB_APP_URL = 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+13. Tukar kepada URL Web App anda.
+14. Upload index.html, style.css, dan script.js ke hosting HTTPS seperti GitHub Pages/Netlify.
+
+Nota:
+- Spreadsheet ID sudah dimasukkan.
+- Google Drive Folder ID sudah dimasukkan.
+- Rekod Booking di paparan web sudah dibuang.
+- Baki di paparan web sudah dibuang, tetapi baki masih disimpan di Google Sheets.

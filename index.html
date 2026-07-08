@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistem Booking Homestay + PDPA</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <section class="card hero">
+      <h1>Sistem Booking Homestay</h1>
+      <p>RM150 semalam • Deposit tetap RM100 • Consent PDPA + peraturan homestay • Tandatangan digital</p>
+    </section>
+
+    <section class="card">
+      <h2>Maklumat Pelanggan</h2>
+      <form id="bookingForm">
+        <label>Nama Penuh
+          <input type="text" id="nama" required placeholder="Contoh: Ali Bin Ahmad" />
+        </label>
+
+        <label>No. Telefon
+          <input type="tel" id="telefon" required placeholder="Contoh: 0123456789" />
+        </label>
+
+        <label>No. IC / Passport
+          <input type="text" id="ic" required placeholder="Contoh: 900101-12-3456" />
+        </label>
+
+        <div class="grid">
+          <label>Tarikh Check-in
+            <input type="date" id="checkin" required />
+          </label>
+          <label>Tarikh Check-out
+            <input type="date" id="checkout" required />
+          </label>
+        </div>
+
+        <section class="ic-upload-box">
+          <h3>Gambar IC / Passport</h3>
+          <p class="muted">Tekan butang kamera untuk ambil gambar terus. Jika kamera tidak dibenarkan oleh browser, gunakan pilihan upload gambar.</p>
+          <div class="grid">
+            <div class="camera-card">
+              <h4>Gambar IC Depan</h4>
+              <video id="icFrontVideo" class="camera-video" playsinline autoplay muted></video>
+              <canvas id="icFrontCanvas" class="hidden"></canvas>
+              <img id="icFrontPreview" class="preview" alt="Preview IC depan" />
+              <input type="hidden" id="icFrontData" />
+              <div class="actions camera-actions">
+                <button type="button" class="secondary" data-camera="front">Buka Kamera</button>
+                <button type="button" data-capture="front">Ambil Gambar</button>
+                <button type="button" class="danger" data-retake="front">Ambil Semula</button>
+              </div>
+              <label class="fallback">Atau pilih gambar IC depan
+                <input type="file" id="icFrontFile" accept="image/*" capture="environment" />
+              </label>
+            </div>
+
+            <div class="camera-card">
+              <h4>Gambar IC Belakang</h4>
+              <video id="icBackVideo" class="camera-video" playsinline autoplay muted></video>
+              <canvas id="icBackCanvas" class="hidden"></canvas>
+              <img id="icBackPreview" class="preview" alt="Preview IC belakang" />
+              <input type="hidden" id="icBackData" />
+              <div class="actions camera-actions">
+                <button type="button" class="secondary" data-camera="back">Buka Kamera</button>
+                <button type="button" data-capture="back">Ambil Gambar</button>
+                <button type="button" class="danger" data-retake="back">Ambil Semula</button>
+              </div>
+              <label class="fallback">Atau pilih gambar IC belakang
+                <input type="file" id="icBackFile" accept="image/*" capture="environment" />
+              </label>
+            </div>
+          </div>
+        </section>
+
+        <section class="summary">
+          <div><span>Jumlah malam</span><strong id="malam">0</strong></div>
+          <div><span>Jumlah bayaran</span><strong id="total">RM0</strong></div>
+          <div><span>Deposit</span><strong>RM100</strong></div>
+        </section>
+
+        <section class="pdpa-box">
+          <h3>PDPA & Peraturan Homestay</h3>
+          <p><b>Persetujuan PDPA:</b> Saya bersetuju maklumat peribadi saya termasuk nama, nombor telefon, nombor IC/passport, gambar IC/passport depan dan belakang, tarikh tempahan dan tandatangan dikumpul serta diproses untuk pengurusan tempahan, pengesahan identiti, keselamatan premis, pembayaran dan urusan berkaitan penginapan homestay.</p>
+          <p><b>Peraturan homestay:</b> Saya bersetuju menjaga kebersihan rumah, tidak merosakkan harta benda, tidak membuat bising sehingga mengganggu jiran, tidak membawa aktiviti haram, tidak merokok di dalam rumah jika dilarang, tidak membawa haiwan peliharaan tanpa kebenaran, tidak melebihi jumlah tetamu yang dibenarkan, mematuhi masa check-in/check-out, dan bertanggungjawab atas kerosakan atau kehilangan barang semasa menginap.</p>
+          <p>Saya faham deposit boleh digunakan untuk menampung kerosakan, kehilangan barang, pelanggaran peraturan, atau caj tambahan yang berkaitan dengan penginapan.</p>
+          <label class="check">
+            <input type="checkbox" id="pdpaAgree" required />
+            Saya telah membaca dan bersetuju dengan PDPA serta peraturan homestay di atas.
+          </label>
+        </section>
+
+        <section>
+          <h3>Tandatangan Pelanggan</h3>
+          <canvas id="signature" width="700" height="240"></canvas>
+          <div class="actions">
+            <button type="button" id="clearSig" class="secondary">Padam Signature</button>
+          </div>
+        </section>
+
+        <button type="submit">Hantar Booking</button>
+        <p id="message"></p>
+      </form>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
